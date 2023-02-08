@@ -1,4 +1,5 @@
 //Задача 1:
+
 function cachingDecoratorNew(func) {
 let cache = [];
   function wrapper(...args) {
@@ -26,6 +27,7 @@ let cache = [];
 }
 
 //Задача 2
+
 function debounceDecoratorNew(f, ms) {
   let timeout;
   let flag = false;
@@ -44,6 +46,7 @@ function debounceDecoratorNew(f, ms) {
 }
 
 //Задача 3
+
 function debounceDecorator2(f, ms) {
   let timeout;
   let flag = false;
@@ -61,5 +64,4 @@ function debounceDecorator2(f, ms) {
     }, ms);
   };
   return wrapper;
-
 }
