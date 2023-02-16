@@ -30,38 +30,19 @@ let cache = [];
 
 function debounceDecoratorNew(f, ms) {
   let timeout;
-  let flag = false;
-  return function wrapper(...args) {
-    if (!flag) {
-    f.apply(this, args);
+ return function wrapper(...args) {
+    if (timeout === undefined) {
+      wrapper.count = 1;
+      wrapper.allCount = 0;
+      f(...args);
     }
-    flag = true;
-    clearTimeout(timeout);
-
-    timeout = setTimeout(() => {
-    f.apply(this, args);
-    flag = false;
-    }, ms);
-  };
-}
-
-//Задача 3
-
-function debounceDecorator2(f, ms) {
-  let timeout;
-  let flag = false;
-  wrapper.count = 0;
-  function wrapper(...args) {
-  wrapper.count ++;
-    if (!flag) {
-    f.apply(this, args);
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);      
     }
-  flag = true;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-    f.apply(this, args);
-      flag = false;
-    }, ms);
-  };
-  return wrapper;
+    timeoutId = setTimeout(() => {
+      f(...args);
+      wrapper.count++
+    }, delay);
+    wrapper.allCount++;
+  }
 }
